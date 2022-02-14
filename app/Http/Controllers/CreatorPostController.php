@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Post;
+use App\Models\Purchase;
 use Carbon\Carbon;
+// use Storage
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 class CreatorPostController extends Controller
 {

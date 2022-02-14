@@ -35,7 +35,7 @@ Route::post('/posts/create',[CreatorPostController::class, 'store']);
 Route::get('/posts/{post:slug}',[CreatorPostController::class, 'show']);
 Route::get('/posts/{post:slug}/edit',[CreatorPostController::class, 'edit']);
 Route::post('/posts/{post:slug}/purchase',[UserPurchaseController::class, 'purchase']);
-Route::get('/{user:username}',[UserProfileController::class, 'user']);
+Route::get('/profile/{user:username}',[UserProfileController::class, 'user']);
 Route::get('/storage/creator/files/{file:slug}',[CreatorPostController::class,'showFile']);
 Route::get('/top-up/deposit',[TopupController::class,'index']);
 Route::post('/top-up/deposit',[TopupController::class,'store']);

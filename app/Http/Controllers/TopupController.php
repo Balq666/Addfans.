@@ -17,9 +17,10 @@ class TopupController extends Controller
     }
     public function store(Request $request){
         $validatedData = $request->validate([
-            'deposit'=>['required','integer','min:10000']
+            'deposit'=>['required','integer','min:10000'],
+            'g-recaptcha-response' => ['required','captcha']
         ]);
         auth()->user()->getWallet(auth()->user()->username.'-add-pay')->deposit($validatedData['deposit']);
-        return redirect('/profile')->with('successDeposit','Berhasil deposit kewallet anda!');
+        return redirect('/profile/'.auth()->user()->username)->with('successDeposit','Berhasil deposit kewallet anda!');
     }
 }

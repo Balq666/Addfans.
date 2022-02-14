@@ -32,12 +32,14 @@
     </div>
   </div>
 @else
-<div class="xl:w-3/5 lg:w-3/5 md:w-3/5 w-full border mx-auto">
+<div class="xl:w-3/5 lg:w-3/5 md:w-3/5 w-full mx-auto">
     @foreach ($posts as $post)
 
-    <div class="max-w-full bg-white my-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-        <a href="/posts/{{$post->slug}}">
-            <img class="rounded-t-lg" src="/storage/{{$post->thumbnail}}" alt="" class="w-full">
+    <div class="w-full bg-white my-2 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <a href="/posts/{{$post->slug}}" class="block" >
+            <div class="w-full border">
+                <img class="w-full rounded-t-lg" src="/storage/{{$post->thumbnail}}" >
+            </div>
         </a>
         <div class="p-5">
             <a href="/posts/{{$post->slug}}">

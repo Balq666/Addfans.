@@ -18,10 +18,21 @@ class UserProfileController extends Controller
         ]);
     }
     public function user(User $user){
+        
         if($user->id != auth()->user()->id){
-            return view('user.profile.user',[
+            return view('user.profile.index',[
                 'title'=>'Other user',
-                'user'=>$user
+                'user'=>$user,
+                'following'=>$user->followings->count(),
+                'follower'=>$user->followers->count()
+            ]);
+        }else {
+            return view('user.profile.index',[
+                'title'=>'Other user',
+                'user'=>$user,
+                'balance'=>auth()->user()->getWallet(auth()->user()->username.'-add-pay')->balance,
+                'followings'=>$user->followings->count(),
+                'followers'=>$user->followers->count()
             ]);
         }
         return redirect('/')->with('cantAccess');

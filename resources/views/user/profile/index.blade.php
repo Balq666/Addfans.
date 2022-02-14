@@ -19,79 +19,88 @@
             
             <div class="profile-auth flex justify-between">
                 <div class="auth-profile">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{auth()->user()->name}}</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{auth()->user()->username}}</p>
+                    <div class="flex gap-x-4">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$user->name}} 
+                        </h5>
+                        @if ($user->id != auth()->user()->id)
+                            <livewire:profile-user :user="$user"/>
+                        @endif
+                    </div>
+                    <p class="text-lg font-normal text-gray-700 dark:text-gray-400">{{'@'.$user->username}}</p>
+                    @if ($user->id == auth()->user()->id)
                     <a href="/edit-profile" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Edit
                         <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </a>
+                    @endif
                 </div>
                 <div class="auth-following-or-follower md:hidden sm:hidden hidden lg:hidden xl:block ml-2">
                     <div class="flex w-full gap-x-4">
-                        @if (auth()->user()->hasRole('creator'))
+                        @if ($user->hasRole('creator'))
                             <div class="posts w-2/6">
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Posts</p>
-                                <p class="font-medium text-xl text-gray-900">{{ auth()->user()->posts->count() }}</p>
+                                <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Posts</p>
+                                <p class="font-medium text-center text-lg text-gray-900">{{ $user->posts->count() }}</p>
                             </div>
                             <div class="following w-2/6">
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Following</p>
-                                <p class="font-medium text-xl text-gray-900">{{ auth()->user()->followings->count() }}</p>
+                                <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Following</p>
+                                <p class="font-medium text-center text-lg text-gray-900">{{ $user->followings->count() }}</p>
                             </div>
                             <div class="follower w-2/6 ">
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Follower</p>
-                                <p class="font-medium text-xl text-gray-900">{{ auth()->user()->followers->count() }}</p>
+                                <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Follower</p>
+                                <p class="font-medium text-center text-lg text-gray-900">{{ $user->followers->count() }}</p>
                             </div>
                         @else
                             <div class="following w-2/4">
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Following</p>
-                                <p class="font-medium text-xl text-gray-900">{{ auth()->user()->followings->count() }}</p>
+                                <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Following</p>
+                                <p class="font-medium text-center text-lg text-gray-900">{{ $user->followings->count() }}</p>
                             </div>
                             <div class="follower w-2/4 ">
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Follower</p>
-                                <p class="font-medium text-xl text-gray-900">{{ auth()->user()->followers->count() }}</p>
+                                <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 ">Follower</p>
+                                <p class="font-medium text-center text-lg text-gray-900">{{ $user->followers->count() }}</p>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-        <div class="xl:container w-11/12 mx-auto my-2 p-6 max-w-sm bg-blue-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <div class="text-white w-full flex">
-                <ion-icon name="wallet-outline" class="text-4xl"></ion-icon>
-                <p class=" text-3xl text-white ml-2">Balance</p>
-            </div>
+        @if ($user->id == auth()->user()->id)
+            <div class="xl:container w-11/12 mx-auto my-2 p-6 max-w-sm bg-blue-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <div class="text-white w-full flex">
+                    <ion-icon name="wallet-outline" class="text-4xl"></ion-icon>
+                    <p class=" text-3xl text-white ml-2">Balance</p>
+                </div>
 
-            <p class="mb-3 font-normal text-white dark:text-gray-400">Rp.{{number_format($balance)}}</p>
-            <a href="/topup" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg border border-white focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Topup
-                <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
-        </div>
-        <div class=" md:block block lg:block xl:hidden w-11/12 mx-auto my-2 p-6 max-w-sm bg-blue-600 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <p class="mb-3 font-normal text-white dark:text-gray-400">Rp.{{number_format($balance)}}</p>
+                <a href="/topup" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white rounded-lg border border-white focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Topup
+                    <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+            </div>
+        @endif
+
+        <div class=" md:block block lg:block xl:hidden w-11/12 mx-auto my-2 p-6 max-w-sm bg-white border border-blue-500 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="following-or-follower flex">
-                @if (auth()->user()->hasRole('creator'))
+                @if ($user->hasRole('creator'))
                     <div class="posts w-2/6">
-                        <p class="mb-2 text-center text-xl font-bold tracking-tight text-white ">Posts</p>
-                        <p class="font-medium text-center text-lg text-white">{{ auth()->user()->posts->count() }}</p>
+                        <p class="mb-2 text-center text-xl font-bold tracking-tight text-blue-500 ">Posts</p>
+                        <p class="font-medium text-center text-lg text-blue-500">{{ $user->posts->count() }}</p>
                     </div>
                     <div class="following w-2/6">
-                        <p class="mb-2 text-xl text-center font-bold tracking-tight text-white ">Following</p>
-                        <p class="font-medium text-center text-lg text-white">{{ auth()->user()->followings->count() }}</p>
+                        <p class="mb-2 text-xl text-center font-bold tracking-tight text-blue-500 ">Following</p>
+                        <p class="font-medium text-center text-lg text-blue-500">{{ $user->followings->count() }}</p>
                     </div>
                     <div class="follower w-2/6 ">
-                        <p class="mb-2 text-xl text-center font-bold tracking-tight text-white ">Follower</p>
-                        <p class="font-medium text-center text-lg text-white">{{ auth()->user()->followers->count() }}</p>
+                        <p class="mb-2 text-xl text-center font-bold tracking-tight text-blue-500 ">Follower</p>
+                        <p class="font-medium text-center text-lg text-blue-500">{{ $user->followers->count() }}</p>
                     </div>
                 @else
                 <div class="following w-2/4">
-                    <p class="mb-2 text-xl font-bold tracking-tight text-white ">Following</p>
-                    <p class="font-medium text-lg text-white">{{ auth()->user()->followings->count() }}</p>
+                    <p class="mb-2 text-xl font-bold tracking-tight text-blue-500 ">Following</p>
+                    <p class="font-medium text-lg text-blue-500">{{ $user->followings->count() }}</p>
                 </div>
                 <div class="follower w-2/4 ">
-                    <p class="mb-2 text-xl font-bold tracking-tight text-white ">Follower</p>
-                    <p class="font-medium text-lg text-white">{{ auth()->user()->followers->count() }}</p>
+                    <p class="mb-2 text-xl font-bold tracking-tight text-blue-500 ">Follower</p>
+                    <p class="font-medium text-lg text-blue-500">{{ $user->followers->count() }}</p>
                 </div>
                 @endif
                 
