@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price')->default(0);
-            $table->date('expired_date');
+            $table->date('expired_date')->nullable();
             $table->enum('status',['enable','disabled'])->default('enable');
             $table->string('thumbnail');
             $table->timestamps();

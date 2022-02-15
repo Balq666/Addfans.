@@ -27,7 +27,7 @@ class UserRegisterController extends Controller
         $validatedData = $request->validate([
             'name'=>'required',
             'username'=>'required|alpha_dash|max:30',
-            'email'=>'required|email:dns',
+            'email'=>'required|email',
             'password'=>['required',Password::min(8)->numbers()->mixedCase()->symbols(),'string']
         ]);
         $validatedData['password']= Hash::make($validatedData['password']);

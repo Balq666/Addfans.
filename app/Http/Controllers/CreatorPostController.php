@@ -28,39 +28,78 @@ class CreatorPostController extends Controller
         }
     }
     public function store(Request $request){
-        $validator = Validator::make($request->all(),[
-            'title'=>['required','max:150','min:10'],
-            'slug'=>['required','unique:posts'],
-            'price'=>['required','numeric','min:5000'],
-            'description'=>['required','string'],
-            'thumbnail'=>['required','image','file','max:5256'],
-            'expired_date'=>['required'],
-            'files'=>['required'],
-        ])->validate();
-        $validator['thumbnail'] = $request->file('thumbnail')->store('/post-images');
-        $post = Post::create([
-            'title'=>$validator['title'],
-            'slug'=>$validator['slug'],
-            'price'=>$validator['price'],
-            'description'=>$validator['description'],
-            'thumbnail'=>$validator['thumbnail'],
-            'expired_date'=>Carbon::parse($validator['expired_date']),
-            'user_id'=>auth()->user()->id,
-        ]);
-        foreach($request->file('files') as $value){
-            $name = $value->getClientOriginalName();
-            $slug = SlugService::createSlug(File::class,'slug',$name);
-            $extension = $value->getClientOriginalExtension();
-            $path = $value->storeAs("/creator/files",$name);
-            File::create([
-                'post_id'=> $post->id,
-                'path'=>$path,
-                'title'=>$name,
-                'slug'=>$slug,
-                'extension'=> $extension
+        if(isset($request->expired_date)){
+            $validator = Validator::make($request->all(),[
+                'title'=>['required','max:150','min:10'],
+                'slug'=>['required','unique:posts'],
+                'price'=>['required','numeric','min:5000'],
+                'description'=>['required','string'],
+                'thumbnail'=>['required','image','file','max:5256'],
+                'expired_date'=>['required'],
+            ])->validate();
+            $validator['thumbnail'] = $request->file('thumbnail')->store('/post-images');
+            $post = Post::create([
+                'title'=>$validator['title'],
+                'slug'=>$validator['slug'],
+                'price'=>$validator['price'],
+                'description'=>$validator['description'],
+                'thumbnail'=>$validator['thumbnail'],
+                'expired_date'=>Carbon::parse($validator['expired_date']),
+                'user_id'=>auth()->user()->id,
             ]);
+            if($request->hasFile('files')){
+                foreach($request->file('files') as $value){
+                    $name = $value->getClientOriginalName();
+                    $slug = SlugService::createSlug(File::class,'slug',$name);
+                    $extension = $value->getClientOriginalExtension();
+                    $path = $value->storeAs("/creator/files",$name);
+                    File::create([
+                        'post_id'=> $post->id,
+                        'path'=>$path,
+                        'title'=>$name,
+                        'slug'=>$slug,
+                        'extension'=> $extension
+                    ]);
+                }
+                return redirect('/posts')->with('successAddPost','Berhasil mengupload postingan kamu!');
+            }
+            return redirect('/posts')->with('successAddPost','Berhasil mengupload postingan kamu!');
+        }else{
+            $validator = Validator::make($request->all(),[
+                'title'=>['required','max:150','min:10'],
+                'slug'=>['required','unique:posts'],
+                'price'=>['required','numeric','min:5000'],
+                'description'=>['required','string'],
+                'thumbnail'=>['required','image','file','max:5256'],
+            ])->validate();
+            $validator['thumbnail'] = $request->file('thumbnail')->store('/post-images');
+            $post = Post::create([
+                'title'=>$validator['title'],
+                'slug'=>$validator['slug'],
+                'price'=>$validator['price'],
+                'description'=>$validator['description'],
+                'thumbnail'=>$validator['thumbnail'],
+                'expired_date'=>null,
+                'user_id'=>auth()->user()->id,
+            ]);
+            if($request->hasFile('files')){
+                foreach($request->file('files') as $value){
+                    $name = $value->getClientOriginalName();
+                    $slug = SlugService::createSlug(File::class,'slug',$name);
+                    $extension = $value->getClientOriginalExtension();
+                    $path = $value->storeAs("/creator/files",$name);
+                    File::create([
+                        'post_id'=> $post->id,
+                        'path'=>$path,
+                        'title'=>$name,
+                        'slug'=>$slug,
+                        'extension'=> $extension
+                    ]);
+                }
+                return redirect('/posts')->with('successAddPost','Berhasil mengupload postingan kamu!');
+            }
+            return redirect('/posts')->with('successAddPost','Berhasil mengupload postingan kamu!');
         }
-        return redirect('/posts')->with('successAddPost','Berhasil mengupload postingan kamu!');
     }
     public function edit(Post $post){
         if(auth()->user()->hasRole("creator")){
