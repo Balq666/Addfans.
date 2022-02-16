@@ -16,7 +16,11 @@
         @endif
     </div>
     <div class="w-full h-52 overflow-hidden">
+        @if (is_null($post->thumbnail))
+        <img src="https://source.unsplash.com/800x400/?random" alt="" class="-mt-[200px] border border-2 w-full">
+        @else
         <img src="/storage/{{$post->thumbnail}}" alt="" class="-mt-[200px] border border-2 w-full">
+        @endif
     </div>
     <div class="headtitle w-full flex items-center">
         <p class="text-2xl font-medium mt-2 w-4/5">{{$post->title}}</p>

@@ -23,7 +23,6 @@ class CreatorPostController extends Controller
         } else {
             return view('user.customer.posts.index',[
                 'title'=>'My all posts',
-                'posts'=>Post::whereIn('user_id',auth()->user()->followings->pluck('id'))->inRandomOrder()->limit(5)->get()
             ]);
         }
     }

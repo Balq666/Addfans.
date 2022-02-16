@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('price')->default(0);
             $table->date('expired_date')->nullable();
             $table->enum('status',['enable','disabled'])->default('enable');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }

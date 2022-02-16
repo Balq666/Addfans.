@@ -32,7 +32,7 @@ class PostSeeder extends Seeder
                 'price'=>$price,
                 'expired_date'=>Carbon::createFromDate(2022,3,13),
                 'status'=>'enable',
-                'thumbnail'=>'post-images/TdiXaKnCLqxihPo2qjESraIcSceH74T7LT5fMCxj.png',
+                'thumbnail'=>null,
                 'user_id'=>$user_id
             ]);
         }
