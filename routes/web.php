@@ -6,6 +6,7 @@ use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\CreatorPostController;
 use App\Http\Controllers\TopupController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserPurchaseController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -39,3 +40,5 @@ Route::get('/profile/{user:username}',[UserProfileController::class, 'user']);
 Route::get('/storage/creator/files/{file:slug}',[CreatorPostController::class,'showFile']);
 Route::get('/top-up/deposit',[TopupController::class,'index']);
 Route::post('/top-up/deposit',[TopupController::class,'store']);
+Route::get('/notifications',[UserNotificationController::class, 'index']);
+Route::get('/notifications/{notif:slug}',[UserNotificationController::class, 'show']);

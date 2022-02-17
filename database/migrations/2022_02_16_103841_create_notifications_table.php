@@ -18,8 +18,10 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class,'user_id')->nullable();
             $table->foreignIdFor(User::class,'user_to_notify')->nullable();
-            $table->enum('type',['post','follow']);
-            $table->string('data');
+            $table->enum('type',['purchase_post','follow','comment']);
+            $table->unsignedBigInteger('data_type_id');
+            $table->string('slug');
+            $table->text('message');
             $table->integer('read');
             $table->timestamps();
         });
