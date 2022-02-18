@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserProfileController extends Controller
 {
@@ -36,5 +38,33 @@ class UserProfileController extends Controller
             ]);
         }
         return redirect('/')->with('cantAccess');
+    }
+    public function edit(User $user){
+        return view('user.profile.edit',[
+            'title'=>'Edit profile',
+            'user'=>$user
+        ]);
+    }
+    public function update(Request $request, User $user){
+        $rules = [
+            'name'=>['required','max:100'],
+            'username'=>['required','max:50'],
+            'email'=>['required','max:50'],
+        ];
+        if(!is_null($request->bio)){
+            $rules['bio'] = ['required','max:500'];
+        }
+        if(!is_null($request->password)){
+            $rules['password'] = ['required',Password::min(8)->symbols()->mixedCase()->numbers()];
+        }
+        $validatedData = $request->validate($rules);
+        if($request->hasFile('profile')){
+            $validatedData['profile'] = request()->file('profile')->store('user/profile/');
+        }
+        if($validatedData['password']){
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
+        $user->update($validatedData);
+        return redirect('/profile/'.$user->username)->with('successEdit','Berhasil mengupdate data profile!');
     }
 }

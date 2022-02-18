@@ -7,12 +7,12 @@
                 @foreach ($notification as $n)
                 <a href="/notifications/{{ $n->slug }}" class="block border shadow">
                     <div class="content-notification w-full block border-b border-b-2 @if($n->read == 1) bg-gray-50 @endif last:border-0 p-2">
-                        <div class="content-profile-text w-full flex gap-x-4">
-                            <div class="content-profile items-center gap-x-4">
+                        <div class="content-profile-text  flex gap-x-4">
+                            <div class="content-profile border h-15 w-15 overflow-hidden items-center gap-x-4">
                                 @if ($n->user->profile == null)
                                 <img src="/img/user.png" alt="" class="w-15">
                                 @else
-                                <img src="/storage/{{ $n->user->profile }}" alt="" class="w-15">
+                                <img src="/storage/{{ $n->user->profile }}" alt="" class=" object-cover h-15 w-15 rounded-full">
                                 @endif
                             </div>
                             <div class="content-text">
