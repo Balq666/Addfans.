@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="content-form w-full h-screen flex items-center justify-center">
-        <div class="shadow-lg w-1/4 rounded-xl">
+        <div class="shadow-lg xl:w-1/4 lg:w-1/4 md:w-2/5 sm:w-2/5 w-4/5 rounded-xl">
 
             <form action="" method="post" class=" bg-white  shadow-inner rounded-xl p-2">
                 <h1 class="text-center text-2xl font-medium">Register creator</h1>

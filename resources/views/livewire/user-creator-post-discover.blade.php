@@ -1,5 +1,5 @@
 <div>
-    {{-- Stop trying to control. --}}
+    {{-- The whole world belongs to you. --}}
     <div class="xl:w-3/5 lg:w-3/5 md:w-3/5 sm:w-3/5 w-11/12 mx-auto">
         @foreach ($posts as $post)
     

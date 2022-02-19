@@ -160,4 +160,13 @@ class CreatorPostController extends Controller
     public function showFile(File $file){
         return Storage::download($file->path);
     }
+    public function discoverPosts(){
+        if(auth()->user()->hasRole('creator')){
+            return view('user.creator.discover.posts.index',[
+                'title'=>'All your following user posts'
+            ]);
+        } else {
+            return redirect()->back();
+        }
+    }
 }

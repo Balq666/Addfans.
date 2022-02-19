@@ -14,19 +14,31 @@
             </button>
         </div>
         @endif
+        @if (session()->has('failedPay'))
+        <div id="alert-3" class="flex p-4 mb-4 bg-red-100 rounded-lg dark:bg-red-200" role="alert">
+            <svg class="flex-shrink-0 w-5 h-5 text-red-700 dark:text-red-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+            <div class="ml-3 text-sm font-medium text-red-700 dark:text-red-800">
+            {{session('failedPay')}}
+            </div>
+            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 dark:bg-red-200 dark:text-red-600 dark:hover:bg-red-300" data-collapse-toggle="alert-3" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+        @endif
     </div>
     <div class="w-full h-52 overflow-hidden">
         @if (is_null($post->thumbnail))
-        <img src="https://source.unsplash.com/800x400/?random" alt="" class="-mt-[200px] border border-2 w-full">
+        <img src="https://source.unsplash.com/800x400/?random" alt="" class="w-full h-full object-cover border border-2 w-full">
         @else
         <img src="/storage/{{$post->thumbnail}}" alt="" class="-mt-[200px] border border-2 w-full">
         @endif
     </div>
-    <div class="headtitle w-full flex items-center">
-        <p class="text-2xl font-medium mt-2 w-4/5">{{$post->title}}</p>
-        <p class="text-sm font-medium mt-2 w-1/5">didukung oleh : {{number_format($allPayer)}} orang</p>
+    <div class="headtitle w-full flex flex-wrap gap-y-3 mb-4 items-center">
+        <p class="text-2xl font-medium mt-2 xl:w-4/5 lg:w-4/5 md:w-full sm:w-3/5 w-full">{{$post->title}}</p>
+        <p class="text-sm font-medium mt-2 xl:w-1/5 lg:w-1/5 md:w-full sm:w-2/5 w-full">didukung oleh : {{number_format($allPayer)}} orang</p>
     </div>
-    <p class="text-sm font-medium mt-2">{{$post->description}}</p>
+    <p class="text-sm font-medium mt-2 mb-3">{{$post->description}}</p>
     
     @if (auth()->user()->hasRole('customer'))
         @if (!$nilaiKebenaran)

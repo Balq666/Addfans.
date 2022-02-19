@@ -46,3 +46,4 @@ Route::post('/top-up/deposit',[TopupController::class,'store']);
 Route::get('/notifications',[UserNotificationController::class, 'index']);
 Route::get('/notifications/{notif:slug}',[UserNotificationController::class, 'show']);
 Route::get('/revenue',[UserRevenueController::class,'index']);
+Route::get('/discover/posts',[CreatorPostController::class, 'discoverPosts']);

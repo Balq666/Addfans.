@@ -8,11 +8,11 @@
                 <a href="/notifications/{{ $n->slug }}" class="block border shadow">
                     <div class="content-notification w-full block border-b border-b-2 @if($n->read == 1) bg-gray-50 @endif last:border-0 p-2">
                         <div class="content-profile-text  flex gap-x-4">
-                            <div class="content-profile border h-15 w-15 overflow-hidden items-center gap-x-4">
+                            <div class="content-profile h-15 w-15 overflow-hidden items-center gap-x-4">
                                 @if ($n->user->profile == null)
-                                <img src="/img/user.png" alt="" class="w-15">
+                                <img src="/img/user.png" alt="" class="w-[60px] h-[60px]">
                                 @else
-                                <img src="/storage/{{ $n->user->profile }}" alt="" class=" object-cover h-15 w-15 rounded-full">
+                                <img src="/storage/{{ $n->user->profile }}" alt="" class=" w-[60px] h-[60px] object-cover rounded-full">
                                 @endif
                             </div>
                             <div class="content-text">
@@ -24,7 +24,12 @@
                 </a>
                 @endforeach
             @else
-            <p>Belom ada notifikasi!</p>
+            <div class="flex h-full w-full justify-center items-center">
+                <div class="notif-blank">
+                    <img src="/img/no-data.png" alt="" class="mx-auto xl:w-3/5 lg:w-3/5 md:w-3/5 sm:2/5 w-11/12">
+                    <p class="text-center">Belom ada notifikasi!</p>
+                </div>
+            </div>
             @endif
             @if ($cantAdd)
             @else

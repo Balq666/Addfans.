@@ -61,7 +61,7 @@ class UserProfileController extends Controller
         if($request->hasFile('profile')){
             $validatedData['profile'] = request()->file('profile')->store('user/profile/');
         }
-        if($validatedData['password']){
+        if(isset($validatedData['password'])){
             $validatedData['password'] = Hash::make($validatedData['password']);
         }
         $user->update($validatedData);
