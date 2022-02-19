@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Purchase;
+use App\Models\Revenue;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Http\Request;
@@ -29,6 +30,13 @@ class UserPurchaseController extends Controller
             'message'=>$customer->username.', telah membeli postingan kamu!',
             'slug'=>Factory::create('id_ID')->uuid(),
             'read'=>0
+        ]);
+        Revenue::create([
+            'user_id'=>$customer->id,
+            'user_to_revenue'=>$post->user_id,
+            'type'=>'post',
+            'data_type_id'=>$post->id,
+            'balance'=>$post->price
         ]);
         return redirect()->back()->with('successPay','Berhasil beli!');
     }

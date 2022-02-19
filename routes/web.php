@@ -8,6 +8,7 @@ use App\Http\Controllers\TopupController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserPurchaseController;
+use App\Http\Controllers\UserRevenueController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,4 @@ Route::get('/top-up/deposit',[TopupController::class,'index']);
 Route::post('/top-up/deposit',[TopupController::class,'store']);
 Route::get('/notifications',[UserNotificationController::class, 'index']);
 Route::get('/notifications/{notif:slug}',[UserNotificationController::class, 'show']);
+Route::get('/revenue',[UserRevenueController::class,'index']);
