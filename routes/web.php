@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserPurchaseController;
 use App\Http\Controllers\UserRevenueController;
+use App\Http\Controllers\UserSearchCreatorController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,4 @@ Route::get('/notifications',[UserNotificationController::class, 'index']);
 Route::get('/notifications/{notif:slug}',[UserNotificationController::class, 'show']);
 Route::get('/revenue',[UserRevenueController::class,'index']);
 Route::get('/discover/posts',[CreatorPostController::class, 'discoverPosts']);
+Route::get('/discover/search/account',[UserSearchCreatorController::class,'index']);

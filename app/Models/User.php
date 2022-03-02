@@ -15,10 +15,10 @@ use Bavix\Wallet\Traits\CanPay;
 use Bavix\Wallet\Interfaces\Customer;
 use Overtrue\LaravelFollow\Followable;
 use App\Models\Post;
-
+use Laravel\Scout\Searchable;
 class User extends Authenticatable implements Wallet, Customer
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet, HasWallets, CanPay, Followable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasWallet, HasWallets, CanPay, Followable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,5 +49,11 @@ class User extends Authenticatable implements Wallet, Customer
     ];
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+    public function toSearchableArray(){
+        return [
+            'username'=>$this->username,
+            'name'=>$this->name
+        ];
     }
 }
