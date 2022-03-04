@@ -50,6 +50,13 @@ class User extends Authenticatable implements Wallet, Customer
     public function posts(){
         return $this->hasMany(Post::class);
     }
+    public function isCreator(){
+        return $this->hasRole('creator');
+    }
+    public function shouldBeSearchable()
+    {
+        return $this->isCreator();
+    }
     public function toSearchableArray(){
         return [
             'username'=>$this->username,

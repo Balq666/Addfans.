@@ -3,23 +3,30 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-
+use Livewire\WithPagination;
 class UserSearchCreator extends Component
 {
+    use WithPagination;
     public $search;
-    public $creators;
-    public $tempCreators;
     protected $queryString = ['search'];
+    public function emptySearch(){
+        $this->search = null;
+    }
     public function render()
     {
+        $creators = null;
         if(!is_null($this->search)){
-            $this->tempCreators = DB::table('model_has_roles')->where('role_id',1)->get();
-            // dd($this->tempCreators->pluck('model_id'));
-            $this->creators = User::search($this->search)->whereIn('id',$this->tempCreators->pluck('model_id')->toArray())->get();
-            dd($this->creators);
+            // cari user creator berdasarkan username dan name
+            $creators = User::search($this->search, function($user){
+                return $user->role('creator');
+            })->paginate(5);
+        } else {
+            // jika null maka kembalikan sebagai null
+            $creators = null;
         }
-        return view('livewire.user-search-creator');
+        return view('livewire.user-search-creator',[
+            'creators'=>$creators
+        ]);
     }
 }

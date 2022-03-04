@@ -4,8 +4,18 @@
         <div class="kotak p-2 w-full ">
                 <div class="container w-full flex justify-center items-center ">
                     <div class="relative w-full">
-                        <input type="text" class="h-14 w-full border pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Search anything..." wire:model="search">
-                        <div class="absolute top-4 right-3 text-2xl"> <ion-icon name="search"></ion-icon> </div>
+                        <input type="text" class="h-14 w-full border pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none" placeholder="Cari creator?" wire:model="search">
+                        @if (empty($search))
+                        <div class="absolute top-3 right-3 text-2xl">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        @else
+                        <div class="absolute top-3 right-3 text-2xl">
+                            <button wire:click.prevent="emptySearch" type="button">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        @endif
                     </div>
                 </div>
         </div>
@@ -37,6 +47,9 @@
                     </a>
                     @endif
                     @endforeach
+                    <div class="p-2">
+                        {{ $creators->links('vendor.livewire.tailwind') }}
+                    </div>
                 @else
                     <div class="emote flex items-center p-2">
                         <p>Wah, kreatornya udah pensiun!</p>
