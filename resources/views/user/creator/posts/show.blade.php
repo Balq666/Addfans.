@@ -95,6 +95,6 @@
             </a>
             @endforeach
     @endif
-
+    <livewire:user-comment-post :post="$post"/>
 </div>
 @endsection
