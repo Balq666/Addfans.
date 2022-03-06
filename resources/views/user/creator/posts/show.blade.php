@@ -1,4 +1,11 @@
 @extends('user.layouts.app')
+@section('head')
+    <style>
+        trix-toolbar [data-trix-button-group="file-tools"]{
+            display: none;
+        }
+    </style>
+@endsection
 @section('content')
 <div class="xl:w-3/5 lg:w-3/5 md:w-3/5 w-full border mx-auto p-3 bg-white shadow rounded">
     <div class="w-full">
@@ -35,7 +42,8 @@
         @endif
     </div>
     <div class="headtitle w-full flex flex-wrap gap-y-3 mb-4 items-center">
-        <p class="text-2xl font-medium mt-2 xl:w-4/5 lg:w-4/5 md:w-full sm:w-3/5 w-full">{{$post->title}}</p>
+        {{-- <p class="text-2xl font-medium mt-2 xl:w-4/5 lg:w-4/5 md:w-full sm:w-3/5 w-full">{{$post->title}}</p> --}}
+        <h1>{{ $post->title }}</h1>
         <p class="text-sm font-medium mt-2 xl:w-1/5 lg:w-1/5 md:w-full sm:w-2/5 w-full">didukung oleh : {{number_format($allPayer)}} orang</p>
     </div>
     <p class="text-sm font-medium mt-2 mb-3">{{$post->description}}</p>
@@ -97,4 +105,11 @@
     @endif
     <livewire:user-comment-post :post="$post"/>
 </div>
+@endsection
+@section('script')
+    <script>
+        document.addEventListener('trix-file-accept',function(e){
+            e.preventDefault();
+        });
+    </script>
 @endsection

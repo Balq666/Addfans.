@@ -20,8 +20,8 @@ class UserCommentPost extends Component
         $this->isReplyComment = false;
     }
     public function sendComment(){
-        $this->comment = nl2br(htmlspecialchars($this->comment));
         $this->validate();
+        // dd($this->comment);
         Comment::create([
             'post_id'=>$this->post->id,
             'user_id'=>auth()->user()->id,
@@ -39,7 +39,7 @@ class UserCommentPost extends Component
     }
     public function sendEditComment($id){
         Comment::find($id)->update([
-            'comment'=>nl2br(htmlspecialchars($this->editComment))
+            'comment'=>$this->editComment
         ]);
         $this->editComment = null;
         $this->isEditComment = false;

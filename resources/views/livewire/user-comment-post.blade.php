@@ -2,8 +2,12 @@
     <div class="w-full my-3">
         <form wire:submit.prevent="sendComment" >
             <div class="w-full p-2 bg-blue-500 text-white rounded-t">Comment</div>
-            <textarea wire:model="comment" cols="30" rows="5"  class="w-full border-2 border-blue-400 rounded-b p-2 focus:ring-red-500">
-            </textarea>
+            {{-- <textarea wire:model.debounce.365ms="comment" cols="30" rows="5"  class="w-full border-2 border-blue-400 rounded-b p-2 focus:ring-red-500">
+            </textarea> --}}
+            <div wire:ignore class="p-2 border-2 border-blue-500 rounded-b mb-2">
+                <trix-editor 
+                wire:model.debounce.365ms="comment" class="editor-content"></trix-editor>
+            </div>
             @error('comment')
                 <p class="text-red-500">{{ $message }}</p>
             @enderror
@@ -48,8 +52,10 @@
                             @if ($isEditComment)
                             <form wire:submit.prevent="sendEditComment({{ $c->id }})" class="w-full my-2">
                                 <div class="w-full p-2 bg-blue-500 text-white rounded-t">Edit comment</div>
-                                <textarea wire:model="editComment" id="" cols="30" rows="5" class="w-full border-2 border-blue-400 rounded-b p-2 focus:ring-red-500">
-                                </textarea>
+                                <div wire:ignore class="p-2 mb-2 border-2 border-blue-500 rounded-b">
+                                    <trix-editor 
+                                    wire:model.debounce.365ms="editComment" class="editor-content"></trix-editor>
+                                </div>
                                 @error('editComment')
                                     <p class="text-red-500">{{ $message }}</p>
                                 @enderror
@@ -71,4 +77,7 @@
             @endforeach
         @endif
     </div>
+    <script>
+        console.log(document.querySelector('trix-editor').editor);
+    </script>
 </div>
