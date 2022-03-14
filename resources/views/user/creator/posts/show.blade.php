@@ -4,6 +4,21 @@
         trix-toolbar [data-trix-button-group="file-tools"]{
             display: none;
         }
+        .trix-button--icon-increase-nesting-level,
+        .trix-button--icon-decrease-nesting-level,
+        .trix-button--icon-link,
+        .trix-button--icon-bold,
+        .trix-button--icon-italic,
+        .trix-button--icon-heading-1,
+        .trix-button--icon-strike,
+        .trix-button--icon-quote,
+        .trix-button--icon-code,
+        .trix-button--icon-bullet-list,
+        .trix-button--icon-number-list,
+        .trix-button-group--text-tools[data-trix-button-group="text-tools"],
+        .trix-button-group--block-tools[data-trix-button-group="block-tools"] { display: none; }
+
+
     </style>
 @endsection
 @section('content')
@@ -47,7 +62,7 @@
         <p class="text-sm font-medium mt-2 xl:w-1/5 lg:w-1/5 md:w-full sm:w-2/5 w-full">didukung oleh : {{number_format($allPayer)}} orang</p>
     </div>
     <p class="text-sm font-medium mt-2 mb-3">{{$post->description}}</p>
-    
+
     @if (auth()->user()->hasRole('customer'))
         @if (!$nilaiKebenaran)
             <div class="batas w-full flex items-center mb-3">
@@ -68,8 +83,8 @@
             @else
             <p class="font-medium">Tidak terdapat konten file dalam post ini!</p>
             @endif
-            
-        @else 
+
+        @else
             <div class="batas w-full flex items-center mb-3">
                 <div class="line w-2/6 h-1 bg-blue-400 rounded"></div>
                 <p class="w-2/6 text-center font-medium">Anda sudah mendukung!</p>

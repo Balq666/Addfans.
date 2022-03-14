@@ -379,26 +379,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 [hidden] {
   display: none;
 }
-    h1 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 500;
-}
-    ul {
-  list-style-type: disc;
-  list-style-position: inside;
-}
-    ol {
-  list-style-type: decimal;
-  list-style-position: inside;
-}
-    a {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
-  -webkit-text-decoration-style: solid;
-          text-decoration-style: solid;
-  text-underline-offset: 2px;
-}
 
 *, ::before, ::after {
   --tw-translate-x: 0;
@@ -998,6 +978,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .bg-transparent {
   background-color: transparent;
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .object-cover {
   -o-object-fit: cover;
@@ -1941,3 +1925,4 @@ Ensure the default browser behavior of the `hidden` attribute.
     width: 20%;
   }
 }
+
