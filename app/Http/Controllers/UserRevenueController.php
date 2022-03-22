@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 class UserRevenueController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         return view('user.revenue.index',[
             'title'=>'Revenue user page',

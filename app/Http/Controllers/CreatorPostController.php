@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Post;
 use App\Models\Purchase;
+use App\Models\ReportingPost;
 use Carbon\Carbon;
 // use Storage
 use Illuminate\Http\Request;
@@ -14,6 +15,10 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 class CreatorPostController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         if(auth()->user()->hasRole("creator")){
             return view('user.creator.posts.index',[
@@ -130,29 +135,24 @@ class CreatorPostController extends Controller
         $AllPayer = Purchase::where('post_id',$post->id)->get()->count();
         $files = File::where('post_id',$post->id)->get();
         if(auth()->user()->hasRole('creator')){
-            $fileImage = File::where('post_id',$post->id)->whereIn('extension',['jpg','png','jpeg','svg','giff','webp'])->get();
-            $fileOther = File::where('post_id',$post->id)->whereNotIn('extension',['jpg','png','jpeg','svg','giff','webp'])->get();
             return view('user.creator.posts.show',[
                 'title'=>'Show detail my post',
                 'post'=>$post,
                 'allPayer'=>$AllPayer,
                 'files'=>$files,
-                'fileImages'=>$fileImage,
-                'fileOthers'=>$fileOther
             ]);
         } else {
             $nilaiKebenaran = auth()->user()->getWallet(auth()->user()->username.'-add-pay')->paid($post);
             $AllPayer = Purchase::where('post_id',$post->id)->get()->count();
-            $fileImage = File::where('post_id',$post->id)->whereIn('extension',['jpg','png','jpeg','svg','giff','webp'])->get();
-            $fileOther = File::where('post_id',$post->id)->whereNotIn('extension',['jpg','png','jpeg','svg','giff','webp'])->get();
+            $report = ReportingPost::where(['user_id'=>auth()->user()->id,
+            'post_id'=>$post->id])->first();
             return view('user.creator.posts.show',[
                 'title'=>'Show detail my post',
                 'post'=>$post,
                 'nilaiKebenaran'=>$nilaiKebenaran,
                 'allPayer'=>$AllPayer,
                 'files'=>$files,
-                'fileImages'=>$fileImage,
-                'fileOthers'=>$fileOther
+                'report'=>$report
             ]);
         }
         abort(403, 'THIS ACTION IS NOT ALLOWED FOR USER ROLE CUSTOMER!');
@@ -168,5 +168,16 @@ class CreatorPostController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+    public function storeComplaint(Request $request, Post $post){
+        $validatedData = $request->validate([
+            'keluhan'=>['required']
+        ]);
+        ReportingPost::create([
+            'user_id'=>auth()->user()->id,
+            'post_id'=>$post->id,
+            'message_complaint'=>$validatedData['keluhan']
+        ]);
+        return redirect()->back()->with('successStoreComplaint','Terima kasih atas perhatian kamu, kami akan olah datanya!');
     }
 }

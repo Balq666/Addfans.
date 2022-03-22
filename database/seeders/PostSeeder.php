@@ -28,10 +28,10 @@ class PostSeeder extends Seeder
             Post::create([
                 'title'=>$judul,
                 'slug'=>$slug,
+                'report_code_id'=>1,
                 'description'=>$faker->text(300),
                 'price'=>$price,
                 'expired_date'=>Carbon::createFromDate(2022,3,13),
-                'status'=>'enable',
                 'thumbnail'=>null,
                 'user_id'=>$user_id
             ]);

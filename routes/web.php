@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserRegisterController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserPurchaseController;
 use App\Http\Controllers\UserRevenueController;
 use App\Http\Controllers\UserSearchCreatorController;
+use App\Models\ReportingPost;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index']);
+
 Route::get('/login', [UserLoginController::class,'show'])->name('login')->middleware('guest');
 Route::post('/login', [UserLoginController::class,'login']);
 Route::post('/logout', [UserLoginController::class,'logout'])->name('logout');
@@ -36,6 +40,7 @@ Route::get('/posts',[CreatorPostController::class, 'index']);
 Route::get('/posts/create',[CreatorPostController::class, 'create']);
 Route::post('/posts/create',[CreatorPostController::class, 'store']);
 Route::get('/posts/{post:slug}',[CreatorPostController::class, 'show']);
+Route::post('/posts/{post:slug}',[CreatorPostController::class, 'storeComplaint']);
 Route::get('/posts/{post:slug}/edit',[CreatorPostController::class, 'edit']);
 Route::post('/posts/{post:slug}/purchase',[UserPurchaseController::class, 'purchase']);
 Route::get('/profile/{user:username}',[UserProfileController::class, 'user']);
@@ -49,3 +54,15 @@ Route::get('/notifications/{notif:slug}',[UserNotificationController::class, 'sh
 Route::get('/revenue',[UserRevenueController::class,'index']);
 Route::get('/discover/posts',[CreatorPostController::class, 'discoverPosts']);
 Route::get('/discover/search/account',[UserSearchCreatorController::class,'index']);
+Route::controller(AdminAuthController::class)->prefix('/admin/auth')->group(function(){
+    Route::get('/login','showLogin');
+    Route::post('/login','login');
+});
+Route::controller(AdminDashboardController::class)->prefix('/admin/dashboard')->group(function(){
+    Route::get('/','index');
+    Route::get('/report','reports');
+});
+Route::get('/mantap',function(){
+    dd(ReportingPost::query()
+    ->selectRaw('sum(post_id) as total')->get());
+});

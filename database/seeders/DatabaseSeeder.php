@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReportCode;
+use App\Models\ReportingPost;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,5 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CreatorSeeder::class);
         $this->call(CustomerSeeder::class);
         $this->call(PostSeeder::class);
+        $this->call(AdminSeeder::class);
+        $this->call(ReportCodeSeeder::class);
+        $this->call(ReportingSeeder::class);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ReportCode;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,12 +18,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('support_id')->nullable();
+            $table->foreignIdFor(ReportCode::class);
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price')->default(0);
             $table->date('expired_date')->nullable();
-            $table->enum('status',['enable','disabled'])->default('enable');
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
