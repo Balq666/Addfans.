@@ -9,4 +9,13 @@ class ReportingPost extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public function post(){
+        return $this->belongsTo(Post::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function report_code(){
+        return $this->belongsTo(ReportCode::class);
+    }
 }

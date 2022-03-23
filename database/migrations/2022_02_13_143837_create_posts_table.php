@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('support_id')->nullable();
-            $table->foreignIdFor(ReportCode::class);
+            $table->foreignIdFor(ReportCode::class)->nullable();
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');

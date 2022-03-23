@@ -61,6 +61,8 @@ Route::controller(AdminAuthController::class)->prefix('/admin/auth')->group(func
 Route::controller(AdminDashboardController::class)->prefix('/admin/dashboard')->group(function(){
     Route::get('/','index');
     Route::get('/report','reports');
+    Route::get('/report/{post:slug}','showTakedown');
+    Route::post('/report/{post:slug}','takedown');
 });
 Route::get('/mantap',function(){
     dd(ReportingPost::query()

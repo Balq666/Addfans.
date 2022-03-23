@@ -68,7 +68,7 @@
         <img src="/storage/{{$post->thumbnail}}" alt="" class="-mt-[200px]  border-2 w-full">
         @endif
     </div>
-    @if (!is_null($report))
+    @if (isset($report))
 
     @if ($report->user_id == auth()->user()->id)
     <div class="headtitle w-full flex flex-wrap gap-y-3 mb-4 items-center">

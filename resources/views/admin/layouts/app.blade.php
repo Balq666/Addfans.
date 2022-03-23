@@ -10,6 +10,8 @@
     <meta name="author" content="">
 
     <title>{{$title}}</title>
+    <livewire:styles/>
+
     <link rel="stylesheet" href="/css/app.css">
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -106,7 +108,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
-
+    <livewire:scripts/>
 </body>
 
 </html>
