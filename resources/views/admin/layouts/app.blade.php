@@ -92,8 +92,13 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
+
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form action="/admin/dashboard/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-blue-600 p-2 ">Logout</button>
+                    </form>
+                    {{-- <a class="btn btn-primary" href="login.html">Logout</a> --}}
                 </div>
             </div>
         </div>

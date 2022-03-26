@@ -1,10 +1,11 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
+
 return new class extends Migration
 {
     /**
@@ -14,12 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('revenues', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class,'user_id');
-            $table->foreignIdFor(User::class,'user_to_revenue');
             $table->foreignIdFor(Post::class);
-            $table->unsignedBigInteger('balance');
+            $table->foreignIdFor(User::class);
             $table->unsignedBigInteger('tax');
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('revenues');
+        Schema::dropIfExists('taxes');
     }
 };

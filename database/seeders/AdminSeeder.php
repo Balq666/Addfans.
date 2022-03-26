@@ -17,11 +17,15 @@ class AdminSeeder extends Seeder
     public function run()
     {
         //
-        Admin::create([
+        $admin = Admin::create([
             'name'=>'Iqbal',
             'username' => 'useradmin',
             'password' => Hash::make('password'),
             'email' => 'balq2.0e@gmail.com'
+        ]);
+        $admin->createWallet([
+            'name'=>$admin->name.' AddPay',
+            'slug'=>$admin->username.'-add-pay',
         ]);
     }
 }

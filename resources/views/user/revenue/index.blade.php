@@ -12,9 +12,6 @@
                                     Product
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Type
-                                </th>
-                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     price
                                 </th>
                                 <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
@@ -28,15 +25,10 @@
                         <tbody>
                             <!-- Product 1 -->
                             @foreach ($revenues as $revenue)
-                                
+
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($revenue->type == 'post')
                                         <a href="/posts/{{ $revenue->post->slug }}">{{ $revenue->post->title }}</a>
-                                    @endif
-                                </td>
-                                <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                    {{ $revenue->type }}
                                 </td>
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                     {{ $revenue->balance }}
@@ -47,10 +39,10 @@
                                 <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                     {{ $revenue->TotalBalance }}
                                 </td>
-                                
+
                             </tr>
                             @endforeach
-                            
+
                         </tbody>
                     </table>
                 </div>

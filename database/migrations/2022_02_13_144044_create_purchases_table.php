@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('creator_id');
             $table->foreignId('customer_id');
-            $table->foreignId('post_id');
+            $table->foreignIdFor(Post::class);
             $table->timestamp('date_of_payment');
             $table->timestamps();
         });

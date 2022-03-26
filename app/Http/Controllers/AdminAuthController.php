@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 class AdminAuthController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('adminauth:admin',['except'=>['logout']]);
+    }
     public function showLogin(){
         return view('admin.auth.login',[
             'title'=>'Admin Login'
@@ -18,9 +22,15 @@ class AdminAuthController extends Controller
             'email'=>['required'],
             'password'=>['required']
         ]);
-        if(Auth::guard('admin')->attempt($validatedData)){
+        if(Auth::guard('admin')->attempt(['email'=>$validatedData['email'],'password'=>$validatedData['password']])){
             $request->session()->regenerate();
             return redirect()->intended('/admin/dashboard');
         }
+    }
+    public function logout(Request $request){
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/admin/auth/login');
     }
 }

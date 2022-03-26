@@ -18,9 +18,14 @@
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="/report">
+        <a class="nav-link" href="/admin/dashboard/reports">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>report</span></a>
+            <span>reports</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="/admin/dashboard/taxes">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Taxes</span></a>
     </li>
 
     <!-- Divider -->

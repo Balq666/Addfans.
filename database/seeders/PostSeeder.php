@@ -31,6 +31,7 @@ class PostSeeder extends Seeder
                 'report_code_id'=>1,
                 'description'=>$faker->text(300),
                 'price'=>$price,
+                'tax'=>$price * 0.1,
                 'expired_date'=>Carbon::createFromDate(2022,3,13),
                 'thumbnail'=>null,
                 'user_id'=>$user_id

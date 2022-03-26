@@ -38,6 +38,9 @@ class Post extends Model implements Product
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function report_code(){
+        return $this->belongsTo(ReportCode::class);
+    }
     public function sluggable() : array {
         return [
             'slug'=>[

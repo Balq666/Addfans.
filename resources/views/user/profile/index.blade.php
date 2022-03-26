@@ -45,11 +45,11 @@
                 </button>
             </div>
             @endif
-            
+
             <div class="profile-auth flex justify-between">
                 <div class="auth-profile">
                     <div class="flex gap-x-4">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$user->name}} 
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$user->name}}
                         </h5>
                         @if ($user->id != auth()->user()->id)
                             <livewire:profile-user :user="$user"/>
@@ -132,7 +132,7 @@
                     <p class="font-medium text-lg text-blue-500">{{ $user->followers->count() }}</p>
                 </div>
                 @endif
-                
+
             </div>
         </div>
     </div>

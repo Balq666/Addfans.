@@ -132,30 +132,40 @@ class CreatorPostController extends Controller
         abort(403, 'THIS ACTION IS NOT ALLOWED FOR USER ROLE CUSTOMER!');
     }
     public function show(Post $post){
-        $AllPayer = Purchase::where('post_id',$post->id)->get()->count();
-        $files = File::where('post_id',$post->id)->get();
-        if(auth()->user()->hasRole('creator')){
-            return view('user.creator.posts.show',[
-                'title'=>'Show detail my post',
-                'post'=>$post,
-                'allPayer'=>$AllPayer,
-                'files'=>$files,
-            ]);
+        if($post->report_code_id == 4){
+            return redirect('/posts');
         } else {
-            $nilaiKebenaran = auth()->user()->getWallet(auth()->user()->username.'-add-pay')->paid($post);
             $AllPayer = Purchase::where('post_id',$post->id)->get()->count();
-            $report = ReportingPost::where(['user_id'=>auth()->user()->id,
+            $files = File::where('post_id',$post->id)->get();
+            if(auth()->user()->hasRole('creator')){
+                $nilaiKebenaran = auth()->user()->getWallet(auth()->user()->username.'-add-pay')->paid($post);
+                $report = ReportingPost::where(['user_id'=>auth()->user()->id,
             'post_id'=>$post->id])->first();
-            return view('user.creator.posts.show',[
-                'title'=>'Show detail my post',
-                'post'=>$post,
-                'nilaiKebenaran'=>$nilaiKebenaran,
-                'allPayer'=>$AllPayer,
-                'files'=>$files,
-                'report'=>$report
-            ]);
+                return view('user.creator.posts.show',[
+                    'title'=>'Show detail my post',
+                    'post'=>$post,
+                    'allPayer'=>$AllPayer,
+                    'files'=>$files,
+                    'nilaiKebenaran'=>$nilaiKebenaran,
+                    'report'=>$report
+                ]);
+            } else {
+                $nilaiKebenaran = auth()->user()->getWallet(auth()->user()->username.'-add-pay')->paid($post);
+                $AllPayer = Purchase::where('post_id',$post->id)->get()->count();
+                $report = ReportingPost::where(['user_id'=>auth()->user()->id,
+                'post_id'=>$post->id])->first();
+                return view('user.creator.posts.show',[
+                    'title'=>'Show detail my post',
+                    'post'=>$post,
+                    'nilaiKebenaran'=>$nilaiKebenaran,
+                    'allPayer'=>$AllPayer,
+                    'files'=>$files,
+                    'report'=>$report
+                ]);
+            }
+            abort(403, 'THIS ACTION IS NOT ALLOWED FOR USER ROLE CUSTOMER!');
         }
-        abort(403, 'THIS ACTION IS NOT ALLOWED FOR USER ROLE CUSTOMER!');
+
     }
     public function showFile(File $file){
         return Storage::download($file->path);

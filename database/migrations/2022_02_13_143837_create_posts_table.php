@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price')->default(0);
+            $table->integer('tax');
             $table->date('expired_date')->nullable();
             $table->string('thumbnail')->nullable();
             $table->timestamps();

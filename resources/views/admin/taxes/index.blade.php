@@ -5,39 +5,33 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    User
+                    Creator
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Title
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Total report
+                    Customer
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+                    Total Tax
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($reports as $report)
+            @foreach ($taxes as $tax)
                 <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                        {{$report->post->user->name}}
+                        {{$tax->post->user->name}}
                     </th>
                     <td class="px-6 py-4">
-                        {{$report->post->title}}
+                        {{$tax->post->title}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$report->total}}
+                        {{$tax->TotalCustomer}}
                     </td>
-                    <td class="px-6 py-4 text-right">
-                        @if ($report->total >= 30 && $report->post->report_code_id != 4)
-                        <a href="/admin/dashboard/reports/{{$report->post->slug}}">takedown</a>
-                        @elseif($report->total <= 30 && $report->post->report_code_id != 4)
-                        <p>you cann't takedown this post</p>
-                        @elseif($report->total >= 30 && $report->post->report_code_id == 4)
-                        <p>a post has takedown</p>
-                        @endif
+                    <td class="px-6 py-4">
+                        {{$tax->total}}
                     </td>
                 </tr>
             @endforeach

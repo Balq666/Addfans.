@@ -12,6 +12,7 @@ use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\UserPurchaseController;
 use App\Http\Controllers\UserRevenueController;
 use App\Http\Controllers\UserSearchCreatorController;
+use App\Models\Post;
 use App\Models\ReportingPost;
 use Illuminate\Support\Facades\Route;
 /*
@@ -60,11 +61,23 @@ Route::controller(AdminAuthController::class)->prefix('/admin/auth')->group(func
 });
 Route::controller(AdminDashboardController::class)->prefix('/admin/dashboard')->group(function(){
     Route::get('/','index');
-    Route::get('/report','reports');
-    Route::get('/report/{post:slug}','showTakedown');
-    Route::post('/report/{post:slug}','takedown');
+    Route::get('/reports','reports');
+    Route::get('/reports/{post:slug}','showTakedown');
+    Route::post('/reports/{post:slug}','takedown');
+    Route::get('/taxes','taxes');
+    Route::get('/profile/{username}','profile');
+    Route::post('/logout','logout');
 });
 Route::get('/mantap',function(){
-    dd(ReportingPost::query()
-    ->selectRaw('sum(post_id) as total')->get());
+    $reporting_post = ReportingPost::query()
+    ->groupBy('post_id')
+    ->selectRaw('count(post_id) as total, post_id')->get()->where('total','>=',30)->pluck('post_id')->toArray();
+
+    // Post::whereIn('id',$reporting_post)->update([
+    //     'report_code_id'=>3
+    // ]);
+    // dd(ReportingPost::query()
+    // ->groupBy('post_id')
+    // ->selectRaw('count(post_id) as total, post_id')->get()->where('total','<=',30)->pluck('post_id')->count());
+    dd(Post::whereIn('id',$reporting_post)->get()->pluck('report_code_id')->toArray());
 });
