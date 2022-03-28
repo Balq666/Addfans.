@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sub>2</sub></div>
+        <div class="sidebar-brand-text mx-3">Addfans</div>
     </a>
 
     <!-- Divider -->
@@ -14,17 +14,17 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="/admin/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fa-solid fa-table-columns"></i>
             <span>Dashboard</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="/admin/dashboard/reports">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fa-solid fa-flag"></i>
             <span>reports</span></a>
     </li>
     <li class="nav-item active">
         <a class="nav-link" href="/admin/dashboard/taxes">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fa-solid fa-percent"></i>
             <span>Taxes</span></a>
     </li>
 

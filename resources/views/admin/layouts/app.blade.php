@@ -14,7 +14,8 @@
 
     <link rel="stylesheet" href="/css/app.css">
     <!-- Custom fonts for this template-->
-    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {{-- <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> --}}
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -62,7 +63,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Iqbal - Rizki</span>
                     </div>
                 </div>
             </footer>
@@ -96,7 +97,7 @@
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <form action="/admin/dashboard/logout" method="POST">
                         @csrf
-                        <button type="submit" class="bg-blue-600 p-2 ">Logout</button>
+                        <button type="submit" class="bg-blue-600 p-2 rounded text-white ">Logout</button>
                     </form>
                     {{-- <a class="btn btn-primary" href="login.html">Logout</a> --}}
                 </div>

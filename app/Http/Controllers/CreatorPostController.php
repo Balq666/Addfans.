@@ -26,6 +26,7 @@ class CreatorPostController extends Controller
                 'posts'=>Post::where('user_id',auth()->user()->id)->get()
             ]);
         } else {
+
             return view('user.customer.posts.index',[
                 'title'=>'My all posts',
             ]);
@@ -40,6 +41,7 @@ class CreatorPostController extends Controller
                 'description'=>['required','string'],
                 'thumbnail'=>['required','image','file','max:5256'],
                 'expired_date'=>['required'],
+                'tax'=>['required']
             ])->validate();
             $validator['thumbnail'] = $request->file('thumbnail')->store('/post-images');
             $post = Post::create([
@@ -50,6 +52,8 @@ class CreatorPostController extends Controller
                 'thumbnail'=>$validator['thumbnail'],
                 'expired_date'=>Carbon::parse($validator['expired_date']),
                 'user_id'=>auth()->user()->id,
+                'tax'=>$validator['tax'],
+                'report_code_id'=>1
             ]);
             if($request->hasFile('files')){
                 foreach($request->file('files') as $value){
@@ -75,6 +79,7 @@ class CreatorPostController extends Controller
                 'price'=>['required','numeric','min:5000'],
                 'description'=>['required','string'],
                 'thumbnail'=>['required','image','file','max:5256'],
+                'tax'=>['required']
             ])->validate();
             $validator['thumbnail'] = $request->file('thumbnail')->store('/post-images');
             $post = Post::create([
@@ -85,6 +90,8 @@ class CreatorPostController extends Controller
                 'thumbnail'=>$validator['thumbnail'],
                 'expired_date'=>null,
                 'user_id'=>auth()->user()->id,
+                'tax'=>$validator['tax'],
+                'report_code_id'=>1
             ]);
             if($request->hasFile('files')){
                 foreach($request->file('files') as $value){

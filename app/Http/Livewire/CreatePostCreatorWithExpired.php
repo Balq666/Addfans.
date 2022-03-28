@@ -12,8 +12,10 @@ class CreatePostCreatorWithExpired extends Component
     public $lessThan = false;
     public $pastThan = false;
     public $expired_date;
+    public $tax;
     public function mount(){
         $this->price = 0;
+        $this->tax = 0;
     }
     public function render()
     {
@@ -33,6 +35,11 @@ class CreatePostCreatorWithExpired extends Component
             } else {
                 $this->pastThan = false;
             }
+        }
+        if($this->price != null){
+            $this->tax = $this->price * 0.15;
+        } else {
+            $this->tax = 0;
         }
         return view('livewire.create-post-creator-with-expired');
     }

@@ -15,9 +15,10 @@
                                 <img src="/storage/{{ $n->user->profile }}" alt="" class=" w-[60px] h-[60px] object-cover rounded-full">
                                 @endif
                             </div>
-                            <div class="content-text">
+                            <div class="content-text w-full">
                                 <p class="text-lg font-medium">{{ '@'.$n->user->username }}</p>
                                 <p class="ml-1">{{ $n->message }}</p>
+                                <p class="text-right">{{$n->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
                     </div>
@@ -43,5 +44,5 @@
             @endif
         </div>
     </div>
-    
+
 </div>

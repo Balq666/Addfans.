@@ -8,7 +8,7 @@ class CreatePostCreatorWithoutExpired extends Component
 {
     public $title;
     public $slug;
-    public $price;
+    public $price, $tax;
     public $lessThan = false;
     public function mount(){
         $this->price = 0;
@@ -24,6 +24,11 @@ class CreatePostCreatorWithoutExpired extends Component
             $this->lessThan = true;
         } else {
             $this->lessThan = false;
+        }
+        if($this->price != null){
+            $this->tax = $this->price * 0.15;
+        } else {
+            $this->tax = 0;
         }
         return view('livewire.create-post-creator-without-expired');
     }
