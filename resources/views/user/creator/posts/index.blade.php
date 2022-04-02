@@ -35,7 +35,7 @@
         <h3 class="text-lg font-medium text-purple-700 dark:text-purple-800">Sudah ada postinganmu, buat lagi?</h3>
     </div>
     <div class="mt-2 mb-4 text-sm text-purple-700 dark:text-purple-800">
-        Buatlagi postingannya asw, gw sebagai admin butuh duit!
+        Buatlah lebih banyak post untuk meraih lebih banyak cuan dan berkarya diplatform kami!
     </div>
     <div class="flex">
         <a href="/posts/create" class="text-white flex items-center align-middle bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-purple-800 dark:hover:bg-purple-900">
@@ -67,7 +67,11 @@
                     </a>
                 </div>
             </div>
-
+            @if ($post->expired_date == null)
+                <p class="font-medium mb-2 rounded-xl p-2 w-max bg-green-200 text-sm text-green-700">Konten seumur hidup!</p>
+                @else
+                <p class="font-medium mb-2 rounded-xl p-2 w-max text-sm bg-blue-200 text-blue-700">expired : {{ \Carbon\Carbon::parse($post->expired_date)->locale('id_ID')->diffForHumans() }}</p>
+                @endif
             <a href="/posts/{{$post->slug}}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 See detail!
                 <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>

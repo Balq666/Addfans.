@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function(){
+            Post::whereRaw('expired_date <= now()')->delete();
             if(ReportingPost::query()
                 ->groupBy('post_id')
                 ->selectRaw('count(post_id) as total, post_id')->get()->whereBetween('total',[1,10])->count() >= 0){

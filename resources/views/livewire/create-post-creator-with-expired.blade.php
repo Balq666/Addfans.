@@ -12,7 +12,7 @@
                 @enderror
             </div>
             <div class="mb-6">
-                <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Type your slug here</label>
+                <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Type your slug here (This column will be filled automatically)</label>
                 <input type="slug" name="slug" id="slug" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" value="{{old('title')}}" wire:model="slug" >
                 @error('slug')
                 <p class="text-red-600 text-sm font-medium">{{$message}}</p>
@@ -32,7 +32,7 @@
                 @enderror
             </div>
             <div class="mb-6">
-                <label for="tax" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">This column will be filled automatically</label>
+                <label for="tax" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tax (This column will be filled automatically)</label>
                 <input type="number" name="tax" id="tax" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" value="{{old('tax')}}" wire:model="tax">
 
             </div>

@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         return view('user.home',[
-            'title'=>'mau logout susah!'
+            'title'=>'Home'
         ]);
     }
 }
